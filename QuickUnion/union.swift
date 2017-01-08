@@ -158,12 +158,8 @@ class UnionSquare : Union {
    }
    
    /// объединение двух узлов
-   func union(_ item1: (Int,Int), _ item2: (Int,Int)) -> Bool {
-      let isNeighbours = neighbor(item1, item2)
-      if isNeighbours {
-         super.union(index(item1), index(item2))
-      }
-      return isNeighbours
+   func union(_ item1: (Int,Int), _ item2: (Int,Int)) {
+      super.union(index(item1), index(item2))
    }
    
    /// проверка связности двух узлов

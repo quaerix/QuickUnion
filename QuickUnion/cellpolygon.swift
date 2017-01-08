@@ -26,7 +26,7 @@ class CellPolygon {
       }
       
       // строем связи
-      calc()
+      connectCellsByPlus()
    }
    
    func isOpen(_ item : (Int,Int)) -> Bool {
@@ -34,7 +34,7 @@ class CellPolygon {
    }
    
    /// построение двумерного поля
-   private func calc() {
+   private func connectCellsByPlus() {
       for y in 0..<field.height {
          for x in 0..<field.width where isOpen((x,y)) {
             // связь с правой ячейкой
@@ -46,11 +46,25 @@ class CellPolygon {
                _ = field.union((x,y), (x,y+1))
             }
          }
-         
-         // процент выполненного расчета
-         var _ = Double(y)/Double(field.height)
       }
    }
+   
+   /// построение двумерного поля
+   private func connectCellsByCrest() {
+      for y in 0..<field.height-1 {
+         for x in 0..<field.width where isOpen((x,y)) {
+            // связь с правой ячейкой
+            if x<field.width-1 && isOpen((x+1,y+1)) {
+               _ = field.union((x,y), (x+1,y+1))
+            }
+            // связь с левой ячейкой
+            if x>0 && isOpen((x-1,y+1)) {
+               _ = field.union((x,y), (x-1,y+1))
+            }
+         }
+      }
+   }
+
    
    /// наличие сквозных маршрутов через все поле
    /// - Returns : начальные и конечные точки маршрутов
@@ -70,7 +84,7 @@ class CellPolygon {
          return nil
       }
       
-      // находим сквозные пути вида (0,1) -> <(h-1,5),(h-1,6)>
+      // находим сквозные пути
       for i in 0..<field.width where isOpen((i,0)) {
          
          // точка связана с другими точками верхнего слоя, 

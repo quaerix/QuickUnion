@@ -32,11 +32,12 @@ func cellPolygon(dimension : Int, threshold : Double, fullway : Bool) {
    print(poly.realThreshold)
 }
 
-//cellPolygon(dimension: 20, threshold: 0.62, fullway: false)
-//_ = cellPolygonFindWays(dimension: 80, threshold: 0.55, ways_count: 2)
+cellPolygon(dimension: 20, threshold: 0.58, fullway: true)
+//_ = cellPolygonFindWays(dimension: 100, threshold: 0.59, ways_count: 2)
 
 // фабрика
-findProbabilitiesForCellFieldCrossWays(dimension: 100, ways_count: 2, max_iterations: 1_000, probability: 55...65)
+// поиска оптимальных вероятностей для заданного числа путей
+//findProbabilitiesForCellFieldCrossWays(dimension: 50, ways_count: 4, max_iterations: 1_000, probability: 55...65)
 
 // фабрика
 // численно доказываем, что при пороге открытия 0.593 вероятность сквозной связности резко возрастает
